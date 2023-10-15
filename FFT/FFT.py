@@ -37,7 +37,7 @@ def FFT(array: np.array, forward=True) -> None:#f
         #f deal with base case!
         if len(array) == 1:
             logging.debug("base case reached, returning")
-            return array[0]
+            return array
         #d
         #f deal with recursive case!
         #f split array into segments!

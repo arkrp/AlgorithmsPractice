@@ -3,7 +3,7 @@ import numpy as np
 import logging
 logging.basicConfig(level=logging.DEBUG)
 ###
-def FFT(array: np.array, forward=True) -> None:#f
+def FFT(array: np.array, forward=True, dtype='cdouble') -> None:#f
     logging.debug("FFT called")
     #f docstring
     """
@@ -17,20 +17,23 @@ def FFT(array: np.array, forward=True) -> None:#f
     """
     #d
     #f convert to more precise datatype
-    array = np.array(array,dtype="clongdouble")
-    #d
-    #f perform scaling
-    if forward:
-        array /= len(array)
+    array = np.array(array,dtype=dtype)
     #d
     #f create initial modifier
     initialModifier = np.e**(
-            np.arange(len(array)/2,dtype='clongdouble')
+            2j*np.pi
+            *
+            np.arange(len(array)/2,dtype=dtype)
             /
             len(array)
             )
     logging.debug("modifiers created")
     #d
+    #f scale if forward
+    if forward:
+        array /= len(array)#d
+    else:
+        initialModifier = np.conj(initialModifier)
     #f define recursive function!
     def FFTRecursiveHelper(array: np.array,oddSegmentModifier) -> np.array:
         logging.debug(f"Helper called {array=} {len(array)=}")

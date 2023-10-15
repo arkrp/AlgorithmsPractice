@@ -1,0 +1,28 @@
+DEBUG:root:FFT called
+DEBUG:root:modifiers created
+DEBUG:root:FFT helper function defined
+DEBUG:root:Helper called array=array([0.25+0.j, 0.5 +0.j, 0.75+0.j, 1.  +0.j]) len(array)=4
+DEBUG:root:Helper called array=array([1. +0.j, 1.5+0.j]) len(array)=2
+DEBUG:root:Helper called array=array([2.5+0.j]) len(array)=1
+DEBUG:root:base case reached, returning
+DEBUG:root:Helper called array=array([-0.5+0.j]) len(array)=1
+DEBUG:root:base case reached, returning
+DEBUG:root:Helper called array=array([-5.000000e-01+0.j , -3.061617e-17-0.5j]) len(array)=2
+DEBUG:root:Helper called array=array([-0.5-0.5j]) len(array)=1
+DEBUG:root:base case reached, returning
+DEBUG:root:Helper called array=array([-0.5+0.5j]) len(array)=1
+DEBUG:root:base case reached, returning
+DEBUG:root:FFT called
+DEBUG:root:modifiers created
+DEBUG:root:FFT helper function defined
+DEBUG:root:Helper called array=array([ 2.5+0.j , -0.5-0.5j, -0.5+0.j , -0.5+0.5j]) len(array)=4
+DEBUG:root:Helper called array=array([ 2.+0.j, -1.+0.j]) len(array)=2
+DEBUG:root:Helper called array=array([1.+0.j]) len(array)=1
+DEBUG:root:base case reached, returning
+DEBUG:root:Helper called array=array([3.+0.j]) len(array)=1
+DEBUG:root:base case reached, returning
+DEBUG:root:Helper called array=array([3.+0.00000000e+00j, 1.-1.16743491e-16j]) len(array)=2
+DEBUG:root:Helper called array=array([4.-1.16743491e-16j]) len(array)=1
+DEBUG:root:base case reached, returning
+DEBUG:root:Helper called array=array([2.+1.16743491e-16j]) len(array)=1
+DEBUG:root:base case reached, returning

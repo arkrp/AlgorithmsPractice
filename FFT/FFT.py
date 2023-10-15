@@ -1,9 +1,9 @@
 ### 
 import numpy as np
 import logging
-#logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 ###
-def FFT(array: np.array,forward=True) -> np.array:#f
+def FFT(array: np.array, forward=True) -> None:#f
     logging.debug("FFT called")
     #f docstring
     """
@@ -16,9 +16,16 @@ def FFT(array: np.array,forward=True) -> np.array:#f
         False   - converting from a frequency domain to a time domain
     """
     #d
+    #f convert to more precise datatype
+    array = np.array(array,dtype="clongdouble")
+    #d
+    #f perform scaling
+    if forward:
+        array /= len(array)
+    #d
     #f create initial modifier
     initialModifier = np.e**(
-            np.arange(len(array)/2)
+            np.arange(len(array)/2,dtype='clongdouble')
             /
             len(array)
             )
@@ -54,31 +61,23 @@ def FFT(array: np.array,forward=True) -> np.array:#f
         #d
         #d
         #d
-        #f make the result!
-        #f create new array
-        Results = np.zeros(len(array))
-        #d
+        #f interleave the results!
         #f interleave evens results
-        Results[0::2] = evenResults
+        array[0::2] = evenResults
         #d
         #f interleave odd results
-        Results[1::2] = oddResults
+        array[1::2] = oddResults
         #d
         #d
-        return Results
+        return array
         #d
     logging.debug("FFT helper function defined")
     #d
-    transformResult = FFTRecursiveHelper(array,initialModifier)
-    #f scale the result if necissary
-    if forward:
-        transformResult /= len(array)
+    return FFTRecursiveHelper(array, initialModifier)
     #d
-    #d
-    return transformResult
 ###
-initialArray = np.array([3,5,2,4])
+initialArray = np.array([1,2,3,4])
 transformedArray = FFT(initialArray)
-untransformedArray = FFT(transformedArray,forward=False)
+untransformedArray = FFT(transformedArray, forward=False)
 print(f"{initialArray=}\n{transformedArray=}\n{untransformedArray=}")
 ###

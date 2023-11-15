@@ -3,12 +3,33 @@ Greetings!
 This is Hannah Nelson. The repository to which this message is attached is a storage for practice implementation of common algorithms. Each algorithm folder has a python implementation and a brief explanation of how the algorithm achieves its goal. Thats all there it to it!
 
 Currently implemented algorithms:
-FFT (Fast Fourier Transform)
+FFT (Fast Fourier Transform) (lacks documentation) (needs improvement)
+Heap (data structure) (lacks documentation)
 
 Incomplete algorithms:
 
 Planned algorithms:
 A-Star
+Simplex method
+Quick Sort
+Quick Select
+Merge Sort
+Hyper Log Log
+A-B Tree (data structure)
+K-D Tree (data structure)
+Fibbonochi Heap (data structure)
+Hash Set (data structure)
+Hash Collection (data structure)
+AVL Tree (data structure)
+Order Statistic Tree
+Binary Feasibility Range Objective Tree (data structure) (possibly a special case of branch and bound?)
+Longest Shared Subsequence (2 list) (optimized dynamic programming)
+Longest Shared Subsequence (2 list) (Hunt–Szymanski Algorithm)
+Trie (data structure)
+Skip List (data structure)
+Order Statistic Skip List (data structure)
+
+
 
 I hope you have a wonderful day!
 Hannah Nelson 2023

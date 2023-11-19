@@ -28,6 +28,17 @@ Longest Shared Subsequence (2 list) (Hunt–Szymanski Algorithm)
 Trie (data structure)
 Skip List (data structure)
 Order Statistic Skip List (data structure)
+Specific Permutation Iteration Algorithm (lexographic)
+Specific Permutation Iteration Algorithm (non- lexographic)
+Nth Combination
+Reserviour Sampling
+K Means Clusteruing
+Aglommerative Clustering
+Ford-Fulkerson Algorithm
+Prim-Jarnik Algorithm
+Treap (data structure)
+Strassen Algorithm
+Christofides Algorithm
 
 
 

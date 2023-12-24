@@ -2,7 +2,7 @@ Greetings!
 
 This is Hannah Nelson. The repository to which this message is attached is a storage for practice implementation of common algorithms. Each algorithm folder has a python implementation and a brief explanation of how the algorithm achieves its goal. Thats all there it to it!
 
-
+This repository relies on Numpy
 
 Currently implemented algorithms:
 FFT (Fast Fourier Transform) (lacks documentation) (needs improvement)
@@ -42,7 +42,10 @@ Prim-Jarnik Algorithm
 Treap (data structure)
 Strassen Algorithm
 Christofides Algorithm
-
+Newton Raphson Method
+Newton Gauss Algorithm
+Anealing
+Wave function Collapse Algorithm
 
 
 I hope you have a wonderful day!

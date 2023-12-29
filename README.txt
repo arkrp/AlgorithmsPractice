@@ -44,8 +44,9 @@ Strassen Algorithm
 Christofides Algorithm
 Newton Raphson Method
 Newton Gauss Algorithm
-Anealing
-Wave function Collapse Algorithm
+Simulated Anealing (metaphorical)
+Wave Function Collapse Algorithm
+Genetic Algorithm
 
 
 I hope you have a wonderful day!

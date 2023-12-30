@@ -47,6 +47,8 @@ Newton Gauss Algorithm
 Simulated Anealing (metaphorical)
 Wave Function Collapse Algorithm
 Genetic Algorithm
+Lowest Power Identification via Ratio of least significant digit place to start of roundoff error. (personal experiment)
+State Space Solution Search
 
 
 I hope you have a wonderful day!

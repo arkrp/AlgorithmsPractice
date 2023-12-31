@@ -1,18 +1,34 @@
-### 
+#f import stuff!
 import numpy as np
 import logging
-#logging.basicConfig(level=logging.DEBUG)
-###
-def FFT(array: np.array, forward=True) -> np.array:#f
+#d
+def _fft_base(array: np.array, conjugate=True, scale=True ) -> np.array:#f
     #f docstring
     """
-    performs a complex Fast Forier Transform!
-    CURRENTLY ONLY WORKS IF THE ARRAY IS 2**n IN SIZE!
-    array
+    Performs a complex Fast Forier Transform!
+    Arrays must be of a size that is a power of two.
+    
+    array:
         the array we would like to transformed
-    forward:
-        True - converting from a time domain to a frequency domain
-        False   - converting from a frequency domain to a time domain
+    conjugate:
+        set True if you would like the matrix to effectively be conjugated
+    scale:
+        set True if the matrix should be downscaled
+    
+    The default settings: (conjugate=True, scale=False) perform a standard fft transformation
+    This may be defined as X_n = sum(start=0,end=N-1,iterator=z,x_n*e^(-2*pi*i*n*z/N))
+    
+    Where x is a vector of length N representing the value representation at the points a/N for a is 0 to N-1
+    Where X is a vector of length N representing the complex frequency representation in frequencies of 0 hz to N-1 hz
+    Where N is an integer which has no prime factors besides 2 (The length must be an exponentiation of 2)
+    Where X_n is the nth number in X (zero indexed)
+    Where x_n is the nth number in x (zero indexed)
+
+    To perform a standard inverse fft transform apply ( conjugate=False , scale=True )
+    
+    This may be defined as x_n = sum(start=0,end=N-1,iterator=z,X_n*e(2*pi*i*n*z/N)/N)
+
+    On a sidenote. The scale on the inverse makes... less intuitive sense to me. However this will remain here because I have been led to believe that the downscale is standardly placed on the inverse, rather than the forward transformation.
     """
     #d
     logging.debug("FFT called")
@@ -30,11 +46,11 @@ def FFT(array: np.array, forward=True) -> np.array:#f
             )
     logging.debug("modifiers created")
     #d
-    #f scale if forward
-    if forward:
+    #f scale if needed
+    if scale:
         array /= len(array)#d
-    #f conjugate if reverse
-    else:
+    #f conjugate if specified
+    if conjugate:
         initialModifier = np.conj(initialModifier)
     #d
     #d
@@ -92,9 +108,62 @@ def FFT(array: np.array, forward=True) -> np.array:#f
     #d
     return array
     #d
-###
-initialArray = np.array([1.1,2.5,3.1,4.9],dtype='cdouble')
-transformedArray = FFT(initialArray)
-untransformedArray = FFT(transformedArray, forward=False)
-print(f"{initialArray=}\n{transformedArray=}\n{untransformedArray=}")
-###
+def ffft(array: np.array) -> np.array: #f
+    #f docstring
+    """
+    Performs a FFT operation
+
+    This operation quickly converts a vector representing a time value domain x to a vector representing a frequency value domain X.
+
+    This function requires that all array inputs to it be of the length 2**k where k is some integer.
+
+    This may be defined as X_n = sum(start=0,end=N-1,iterator=z,x_n*e^(-2*pi*i*n*z/N))
+    
+    Where x is a vector of length N representing the value representation at the points a/N for a is 0 to N-1
+    Where X is a vector of length N representing the complex frequency representation in frequencies of 0 hz to N-1 hz
+    Where N is an integer which has no prime factors besides 2 (The length must be an exponentiation of 2)
+    Where X_n is the nth number in X (zero indexed)
+    Where x_n is the nth number in x (zero indexed)
+    """
+    #d
+    return(_fft_base( array , conjugate=True , scale=False ))
+#d
+def ifft(array: np.array) -> np.array: #f
+    #f docstring
+    """
+    Performs an inverse FFT operation
+
+    This operation quickly converts a vector representing a frequency value domain X to a vector representing a time value domain x.
+
+    This function requires that all array inputs to it be of the length 2**k where k is some integer.
+
+    This may be defined as X_n = sum(start=0,end=N-1,iterator=z,x_n*e^(2*pi*i*n*z/N)/N)
+    
+    Where x is a vector of length N representing the value representation at the points a/N for a is 0 to N-1
+    Where X is a vector of length N representing the complex frequency representation in frequencies of 0 hz to N-1 hz
+    Where N is an integer which has no prime factors besides 2 (The length must be an exponentiation of 2)
+    Where X_n is the nth number in X (zero indexed)
+    Where x_n is the nth number in x (zero indexed)
+    """
+    #d
+    return(_fft_base( array , conjugate=False , scale=True ))
+#d
+#f testing!
+if __name__ == "__main__":
+    print('Starting fft Test')
+    initialArray = np.array([1,2,3,4,4,3,2,1],dtype='cdouble')
+    transformedArray = ffft(initialArray)
+    untransformedArray = ifft(transformedArray)
+    transformationError = np.linalg.norm(initialArray-untransformedArray)/np.linalg.norm(initialArray)
+    if transformationError < 0.01:
+        print('test passed!')
+    print(f"{initialArray=}\n{transformedArray=}\n{untransformedArray=}\n{transformationError=}")
+    print('testing convolution')
+    initialArray = np.array([1,1,1,0,0,0,0,0],dtype='cdouble')
+    manualArray = np.array([1,2,3,2,1,0,0,0],dtype='cdouble')
+    convolvedArray = ifft(np.power(ffft(initialArray),2))
+    transformationError = np.linalg.norm(manualArray-convolvedArray)
+    if transformationError < 0.01:
+        print('test passed!')
+    print(f'{initialArray=}\n{np.round(convolvedArray)=}\n{transformationError=}')
+#d

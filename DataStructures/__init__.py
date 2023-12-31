@@ -1,4 +1,7 @@
 """
-test docstring
+Common data structures
+
+Structures:
+Heap
 """
-from .module_heap import Heap
+from .heap import Heap

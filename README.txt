@@ -5,9 +5,12 @@ This is Hannah Nelson. The repository to which this message is attached is a sto
 This repository relies on Numpy
 
 Currently implemented algorithms:
-FFT (Fast Fourier Transform) (lacks documentation) (needs improvement)
-Data Structures
-    Heap (data structure) (lacks documentation)
+FFT (Fast Fourier Transform)
+QuickSort 
+HeapSort
+InsertionSort
+Data Structures:
+    Heap (lacks documentation)
 
 Incomplete algorithms:
 
@@ -49,8 +52,14 @@ Wave Function Collapse Algorithm
 Genetic Algorithm
 Lowest Power Identification via Ratio of least significant digit place to start of roundoff error. (personal experiment)
 State Space Solution Search
-Heap Sort
 
 
 I hope you have a wonderful day!
 Hannah Nelson 2023
+
+
+Testing:
+To test any given module use the following command:
+(cd ..;python3 -m AlgorithmsPractice.<subpackage name>.<submodule name>)
+Example:
+(cd ..;python3 -m AlgorithmsPractice.Sorts.module_heap_sort)

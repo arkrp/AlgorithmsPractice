@@ -1,3 +1,4 @@
+import logging
 from module_insertion_sort import insertion_sort
 def quick_sort(array):
     #f docstring
@@ -14,8 +15,8 @@ def quick_sort(array):
         array[index2] = temp
     #d
     def quick_sort_section(left_side_index,right_side_index): #f
-        print(f'quick_sort_selection {left_side_index=} {right_side_index=}')
-        print(f'{array=}')
+        logging.debug(f'quick_sort_selection {left_side_index=} {right_side_index=}')
+        logging.debug(f'{array=}')
         #f docstring
         """
         recursively quick sorts a section
@@ -25,23 +26,23 @@ def quick_sort(array):
         #d
         def find_too_large_index(): #f
             nonlocal too_large_index
-            while( too_large_index<right_side_index-1 and
+            while( too_large_index<=right_side_index-1 and
                   array[too_large_index]<array[pivot_index] ):
                 too_large_index += 1
         #d
         def find_too_small_index(): #f
             nonlocal too_small_index
-            while( too_small_index>left_side_index and
+            while( too_small_index>=left_side_index and
                   array[too_small_index]>array[pivot_index] ):
                 too_small_index -= 1
         #d
         #f do nothing if the section is of length one or less
         if right_side_index - left_side_index <= 1:
-            print('base case reached')
+            logging.debug('base case reached')
             return
         #d
         #f create variables!
-        pivot_index = 0
+        pivot_index = left_side_index
         too_large_index = left_side_index + 1
         too_small_index = right_side_index - 1
         #d
@@ -59,7 +60,7 @@ def quick_sort(array):
         #f swap pivot to middle
         center_index = too_large_index - 1
         swap_indicies( pivot_index , center_index )
-        print(f'pivot {array[center_index]} placed at {center_index}')
+        logging.debug(f'pivot {array[center_index]} placed at {center_index}')
         #d
         #f recurse!
         quick_sort_section( left_side_index, center_index )

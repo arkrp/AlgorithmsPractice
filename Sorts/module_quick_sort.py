@@ -1,5 +1,4 @@
 import logging
-from module_insertion_sort import insertion_sort
 def quick_sort(array):
     #f docstring
     """
@@ -69,7 +68,7 @@ def quick_sort(array):
     #d
     quick_sort_section(0,len(array))
 if __name__ == "__main__":
-    import tests
-    tests.test_in_place_sort(quick_sort)
+    from .tests import test_in_place_sort
+    test_in_place_sort(quick_sort)
 
     

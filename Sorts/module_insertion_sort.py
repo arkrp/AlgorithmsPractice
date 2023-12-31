@@ -6,6 +6,6 @@ def insertion_sort(array):
             index = index - 1
         array[index] = initial_value
 if __name__ == "__main__":
-    import tests
-    tests.test_in_place_sort(insertion_sort)
+    from .tests import test_in_place_sort
+    test_in_place_sort(insertion_sort)
 

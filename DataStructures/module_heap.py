@@ -207,3 +207,21 @@ class Heap: #f
     #d
     #d
 #d
+if __name__ == '__main__':
+    print('testing heap')
+    sorted_list = [1,2,3,4,5,6,7,8]
+    print('creating heap with values')
+    myheap = Heap(heaptype = 'min', values=[7,6,5,4])
+    sucessful = True
+    print('testing value insertion')
+    for i in [3,2,1,8]:
+        myheap.push(i)
+    print('removing from heap')
+    for i in zip(myheap,sorted_list):
+        print(f'heap value, specificaion: {i[0]} , {i[1]}')
+        if i[0]!=i[1]:
+            sucessful = False
+    if sucessful:
+        print('heap sort sucessful!')
+    else:
+        print('heap sort failed!')

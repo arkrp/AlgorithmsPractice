@@ -14,6 +14,8 @@ def _fft_base(array: np.array, conjugate=True, scale=True ) -> np.array:#f
         set True if you would like the matrix to effectively be conjugated
     scale:
         set True if the matrix should be downscaled
+
+    returns the transformed array
     
     The default settings: (conjugate=True, scale=False) perform a standard fft transformation
     This may be defined as X_n = sum(start=0,end=N-1,iterator=z,x_n*e^(-2*pi*i*n*z/N))
@@ -30,6 +32,16 @@ def _fft_base(array: np.array, conjugate=True, scale=True ) -> np.array:#f
 
     On a sidenote. The scale on the inverse makes... less intuitive sense to me. However this will remain here because I have been led to believe that the downscale is standardly placed on the inverse, rather than the forward transformation.
     """
+    #d
+    #f copy the array
+    array = np.array( array , dtype='cdouble' )
+    #d
+    #f check for proper array length
+    array_length = len(array)
+    while(array_length>1):
+        array_length /= 2
+    if array_length!=1:
+        raise ValueError("Arrays Passed into FFT functions must be of length 2**k")
     #d
     logging.debug("FFT called")
     #f copy the array

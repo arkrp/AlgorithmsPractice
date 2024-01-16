@@ -52,6 +52,12 @@ Wave Function Collapse Algorithm
 Genetic Algorithm
 Lowest Power Identification via Ratio of least significant digit place to start of roundoff error. (personal experiment)
 State Space Solution Search
+Matrix Inverse Algorithm
+Power Iteration Algoirthm
+Reverse Power Iteration Algoirthm
+QR Algorithm
+Francis Algorithm
+Monty Carlo Matrix Inverse Algorithm.
 
 
 I hope you have a wonderful day!

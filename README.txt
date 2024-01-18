@@ -58,6 +58,7 @@ Reverse Power Iteration Algoirthm
 QR Algorithm
 Francis Algorithm
 Monty Carlo Matrix Inverse Algorithm.
+Euler's Method
 
 
 I hope you have a wonderful day!

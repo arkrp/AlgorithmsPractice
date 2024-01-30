@@ -12,9 +12,9 @@ This repository relies on numpy for most of its numerical functions.
 |----|----|
 | Fast Fourier Transform | AlgorithmsPractice.FastTransform.FFT.ffft |
 | Inverse Fast Fourier Transform | AlgorithmsPractice.FastTransform.FFT.ifft |
-| QuickSort | | 
-| HeapSort | |
-|InsertionSort | |
+| QuickSort | AlgorithmsPractice.Sorts.quickSort.quick_sort | 
+| HeapSort | AlgorithmsPractice.Sorts.heapSort.heap_sort |
+| InsertionSort | AlgorithmsPractice.Sorts.insertionSort.insertion_sort |
 
 ## Data Structures:
 | Structure | location |

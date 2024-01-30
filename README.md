@@ -1,20 +1,30 @@
+## Introduction
 Greetings!
 
 This is Hannah Nelson. The repository to which this message is attached is a storage for practice implementation of common algorithms. Each algorithm folder has a python implementation and a brief explanation of how the algorithm achieves its goal. Thats all there it to it!
 
-This repository relies on Numpy
+## Notes
+Algorithms in this package are constructed to be readable rather than fast. All algorithms will meet the asempotic complexity of the intended algorithm but many optimizations which would be desired from a real hardware performance standpoint will not be considered. 
+This repository relies on numpy for most of its numerical functions.
 
-Currently implemented algorithms:
-FFT (Fast Fourier Transform)
-QuickSort 
-HeapSort
-InsertionSort
-Data Structures:
-    Heap (lacks documentation)
+## Currently implemented algorithms
+| Algorithm | location |
+|----|----|
+| Fast Fourier Transform | AlgorithmsPractice.FastTransform.FFT.ffft |
+| Inverse Fast Fourier Transform | AlgorithmsPractice.FastTransform.FFT.ifft |
+| QuickSort | | 
+| HeapSort | |
+|InsertionSort | |
 
-Incomplete algorithms:
+## Data Structures:
+| Structure | location |
+|----|----|
+| Heap | AlgorithmsPractice.DataStructures.heap.Heap |
 
-Planned algorithms:
+    
+
+
+## Planned (not implemented) algorithms
 A-Star
 Simplex method
 Quick Sort
@@ -57,7 +67,7 @@ Power Iteration Algoirthm
 Reverse Power Iteration Algoirthm
 QR Algorithm
 Francis Algorithm
-Monty Carlo Matrix Inverse Algorithm.
+Monty Carlo Matrix Inverse Algorithm
 Euler's Method
 
 

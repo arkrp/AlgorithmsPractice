@@ -21,7 +21,15 @@ This repository relies on numpy for most of its numerical functions.
 |----|----|
 | Heap | AlgorithmsPractice.DataStructures.heap.Heap |
 
-    
+## Testing
+To test any given module use the following command:
+```
+python3 -m AlgorithmsPractice.<subpackage name>.<submodule name>
+```
+Example:
+```
+python3 -m AlgorithmsPractice.Sorts.module_heap_sort
+```
 
 
 ## Planned (not implemented) algorithms
@@ -75,8 +83,4 @@ I hope you have a wonderful day!
 Hannah Nelson 2023
 
 
-Testing:
-To test any given module use the following command:
-(cd ..;python3 -m AlgorithmsPractice.<subpackage name>.<submodule name>)
-Example:
-(cd ..;python3 -m AlgorithmsPractice.Sorts.module_heap_sort)
+

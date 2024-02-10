@@ -77,7 +77,7 @@ QR Algorithm
 Francis Algorithm
 Monty Carlo Matrix Inverse Algorithm
 Euler's Method
-
+Jump Flood
 
 I hope you have a wonderful day!
 Hannah Nelson 2023

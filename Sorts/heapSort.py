@@ -1,4 +1,4 @@
-from ..DataStructures import Heap
+from ..DataStructures.heap import Heap
 def heap_sort(array):
     myheap = Heap()
     for i in array:
@@ -7,5 +7,3 @@ def heap_sort(array):
 if __name__ == "__main__":
     from .tests import test_sort
     test_sort(heap_sort)
-    
-    

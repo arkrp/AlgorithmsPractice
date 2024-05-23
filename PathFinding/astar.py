@@ -1,4 +1,4 @@
-from .problem import NodePathFindingProblem, PathFindingNode, PathFindingSolution as Problem, Node, Solution
+from .pathfinding import PathFinder, Path
 from ..DataStructures.heap import Heap
 from dataclasses import dataclass
 def a_star(problem: Problem) -> Solution:

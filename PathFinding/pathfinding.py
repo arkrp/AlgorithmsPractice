@@ -1,11 +1,27 @@
+""" #  
+Abstract base classes for pathfinding problems through a graph
+
+Multigraphs are not supported.
+
+Contained classes
+Pathfinder - abstract function wrapper for find_path(start, end) method.
+ShortestPathfinder - Pathfinder which finds the shortest path
+WidestPathfinder - Pathfinder which finds the widest path
+Node - abstract node
+Edge - abstract edge
+Path - A collection of edges which share source nodes
+"""
+# 
 #  import stuff!
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Deque
 # 
-class PathFinder(ABC): #  
+class Pathfinder(ABC): #  
     """ #  
     Abstract base class for pathfinding problems. Allows for many problems to share the same interface so pathfinding algorithms may be run on them!
+
+    Example usage: path = Pathfinder.find_path(starting_node, ending_node)
     """
     # 
     @staticmethod #  
@@ -17,13 +33,31 @@ class PathFinder(ABC): #  
         pass
     # 
 # 
+class ShortestPathfinder(Pathfinder): #  
+    """ #  
+    Finds the shortest path
+
+    Example usage: path = ShortestPathfinder.find_path(starting_node, ending_node)
+    """
+    # 
+    pass
+# 
+class WidestPathfinder(Pathfinder): #  
+    """ #  
+    Finds the widest path
+
+    Example usage: path = WidestPathfinder.find_path(starting_node, ending_node)
+    """
+    # 
+    pass
+# 
 class Node(ABC): #  
     """ #  
     Abstract base class for a node in a pathfinding problem.
     """
     # 
     @abstractmethod #  
-    def get_outgoing_edges(self) -> ['Edge']:
+    def get_outgoing_edges(self) -> List['Edge']:
         """
         Gets all edges that are traversable from this node.
         """
@@ -55,21 +89,21 @@ class Edge(ABC): #  
     """
     # 
     @abstractmethod #  
-    def get_source() -> 'Node':
+    def get_source(self) -> 'Node':
         """
         Gets the node which this edge is leading away from.
         """
         pass
     # 
     @abstractmethod #  
-    def get_destination() -> 'Node':
+    def get_destination(self) -> 'Node':
         """
         Gets the node which this edge is leading to.
         """
         pass
     # 
     @abstractmethod #  
-    def get_cost() -> float:
+    def get_cost(self) -> float:
         """
         Gets the cost of traversing the edge from source to destination.
         """
@@ -88,7 +122,7 @@ class Path():
     #  attributes!
     path: Deque['Edge'] = field(default_factory=list, kw_only=True)
     # 
-    def append_back_edge(edge: 'Edge'): #  
+    def append_back_edge(self, edge: 'Edge'): #  
         """ #  
         This function appends an edge to the back of the path.
 
@@ -111,7 +145,7 @@ class Path():
         path.append(edge)
         # 
     # 
-    def append_front_edge(edge: 'Edge'): #  
+    def append_front_edge(self, edge: 'Edge'): #  
         """ #  
         This function appends an edge to the front of the path.
 

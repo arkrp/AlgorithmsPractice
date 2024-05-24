@@ -1,9 +1,10 @@
 #  import stuff
-from .pathfinder import ShortestPathfinder, Node, Path, Edge, GoalCondition, Hueristic
+from .pathfinder import ShortestPathfinder, GoalCondition, Hueristic, NullHueristic
+from .graphobjects import Node, Path, Edge
 from ..DataStructures.heap import Heap
 from dataclasses import dataclass, field
 # 
-class AStar(ShortestPathfinder):
+class AStar(ShortestPathfinder): #  
     """ #  
     Wrapper for A-Star pathfinding algorithm
 
@@ -13,7 +14,7 @@ class AStar(ShortestPathfinder):
     Warning! - if any of the starting nodes meet the goal condition this will return an empty path.
     """
     # 
-    def find_path(starting_nodes: [Node], goal_condition: GoalCondition, hueristic: Hueristic) -> Path: #  
+    def find_path(starting_nodes: [Node], goal_condition: GoalCondition, *, hueristic: Hueristic=NullHueristic) -> Path: #  
         """ #  
         Finds the shortest path from any starting node to a node which meets the goal condition using the A start algorithm.
 
@@ -105,6 +106,7 @@ class AStar(ShortestPathfinder):
         return path
         # 
     # 
+# 
 @dataclass(order=True) #  
 class exploration_vector():
     """

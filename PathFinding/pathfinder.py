@@ -6,7 +6,6 @@ Multigraphs are not supported.
 Contained classes
 Pathfinder - abstract function wrapper for find_path(start, end) method.
 ShortestPathfinder - Pathfinder which finds the shortest path
-WidestPathfinder - Pathfinder which finds the widest path
 Node - abstract node
 Edge - abstract edge
 Path - A collection of edges which share source nodes
@@ -15,6 +14,7 @@ Path - A collection of edges which share source nodes
 #  import stuff!
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
+from collections import deque
 from typing import Deque
 # 
 class Pathfinder(ABC): #  
@@ -26,7 +26,7 @@ class Pathfinder(ABC): #  
     # 
     @staticmethod #  
     @abstractmethod
-    def find_path(start: 'Node', end: 'Node') -> 'Path':
+    def find_path(starting_nodes: ['Node'], goal_condition: 'GoalCondition', hueristic: 'Hueristic') -> 'Path':
         """
         Gets the starting node of the problem.
         """
@@ -42,14 +42,19 @@ class ShortestPathfinder(Pathfinder): #  
     # 
     pass
 # 
-class WidestPathfinder(Pathfinder): #  
-    """ #  
-    Finds the widest path
-
-    Example usage: path = WidestPathfinder.find_path(starting_node, ending_node)
-    """
+class GoalCondition(ABC): #  
+    @staticmethod #  
+    @abstractmethod
+    def is_goal(node: 'Node') -> bool:
+        pass
     # 
-    pass
+# 
+class Hueristic(ABC): #  
+    @staticmethod #  
+    @abstractmethod
+    def hueristic(node: 'Node') -> int:
+        pass
+    # 
 # 
 class Node(ABC): #  
     """ #  
@@ -57,21 +62,25 @@ class Node(ABC): #  
     """
     # 
     @abstractmethod #  
-    def get_outgoing_edges(self) -> List['Edge']:
+    def get_outgoing_edges(self) -> ['Edge']:
         """
         Gets all edges that are traversable from this node.
         """
         pass
     # 
-    @abstractmethod #  
-    def huristic(self) -> float:
+    def get_incoming_edges(self) -> ['Edge']: #  
         """
-        Gives an optimistic numerical estimate of the distance to the destination.
+        Gets all edges that can traverse to this node.
+
+        Implementing this is optional. Some algorithms require it, some do not.
         """
-        pass
+        raise NotImplementedError('Program attempted to find incoming edges on a graph which does not support finding incoming edges.')
     # 
     @abstractmethod #  
     def __hash__(self):
+        """
+        This is needed because most pathing algorithms place nodes in sets.
+        """
         pass
     # 
     @abstractmethod #  
@@ -82,31 +91,51 @@ class Node(ABC): #  
     def __ne__(self, other):
         pass
     # 
+    @abstractmethod #  
+    def __repr__(self):
+        pass
+    # 
 # 
 class Edge(ABC): #  
     """ #  
     Abstract base class representing an edge for a pathfinding problem.
     """
     # 
-    @abstractmethod #  
-    def get_source(self) -> 'Node':
+    @property #  
+    @abstractmethod
+    def source(self) -> 'Node':
         """
-        Gets the node which this edge is leading away from.
+        The node which this edge is leading away from.
+        """
+        pass
+    # 
+    @property #  
+    @abstractmethod
+    def destination(self) -> 'Node':
+        """
+        The node which this edge is leading to.
+        """
+        pass
+    # 
+    @property #  
+    @abstractmethod
+    def cost(self) -> float:
+        """
+        The cost of traversing the edge from source to destination.
         """
         pass
     # 
     @abstractmethod #  
-    def get_destination(self) -> 'Node':
+    def __hash__(self):
         """
-        Gets the node which this edge is leading to.
+        Some pathing algorithms place edges in sets.
+
+        Implementing this is optional
         """
-        pass
+        raise NotImplementedError('Program attempted to hash edges on an unsupported graph. This is often done as a result of attempting to place the edge into a set!')
     # 
     @abstractmethod #  
-    def get_cost(self) -> float:
-        """
-        Gets the cost of traversing the edge from source to destination.
-        """
+    def __repr__(self):
         pass
     # 
 # 
@@ -120,7 +149,7 @@ class Path():
     """
     # 
     #  attributes!
-    path: Deque['Edge'] = field(default_factory=list, kw_only=True)
+    path: Deque['Edge'] = field(default_factory=deque, kw_only=True)
     # 
     def append_back_edge(self, edge: 'Edge'): #  
         """ #  
@@ -167,5 +196,11 @@ class Path():
         #  append the edge!
         path.appendleft(edge)
         # 
+    # 
+    def __repr__(self): #  
+        return_value = "Path("
+        for edge in path:
+            return_value += edge.source + "->" + edge +  ", "
+        return_value += path[-1].destination + ")"
     # 
 # 

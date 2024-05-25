@@ -1,3 +1,12 @@
+""" #  
+Contains the AStar pathfinder.
+
+This pathfinder is a tunable general purpose pathfinding algorithm.
+
+classes
+AStar - a pathfinding.Pathfinder which allows for general purpose pathfinding.
+"""
+# 
 #  import stuff
 from .pathfinder import ShortestPathfinder, GoalCondition, Hueristic, NullHueristic
 from .graphobjects import Node, Path, Edge
@@ -8,8 +17,12 @@ class AStar(ShortestPathfinder): #  
     """ #  
     Wrapper for A-Star pathfinding algorithm
 
+    The A-Star pathfinding algorithm is a modification of Dijkstra's algorithm which allows for the node priority to be arbitrarily biased. By tuning these biases properly A star can run faster than Djikstra's without loss of the ability to find the shortest path
+
+    If no hueristic is provided, this algorithm is equivilant to Dijkstra's algorithm.
+
     usage:
-    shortest_path = AStar.find_path(start_node, end_node)
+    shortest_path = AStar.find_path(start_node, goal_condition, hueristic=hueristic)
 
     Warning! - if any of the starting nodes meet the goal condition this will return an empty path.
     """
@@ -63,7 +76,7 @@ class AStar(ShortestPathfinder): #  
             #  add all outgoing edges to our list of things to explore!
             outgoing_edges = node.outgoing_edges
             for edge in outgoing_edges:
-                unexplored.push((
+                unexplored.push(_exploration_vector(
                     edge,
                     minimum_distance[edge.source]+
                     edge.cost+
@@ -108,7 +121,7 @@ class AStar(ShortestPathfinder): #  
     # 
 # 
 @dataclass(order=True) #  
-class exploration_vector():
+class _exploration_vector():
     """
     represents an edge, and its priority in the priority queue.
     """
@@ -117,5 +130,7 @@ class exploration_vector():
     # the priority of the edge. Computed as distance of destination node,
     bias: float = field(compare=True)
 # 
+#  testing!
 if __name__ == '__main__':
-    print('the test procedure for pathfinding algoirthms is not currently implemented')
+    raise NotImplementedError('the test procedure for the A Star algorithm is not currently implemented')
+# 

@@ -31,7 +31,7 @@ class AStar(ShortestPathfinder): #  
         #   stores the optimal edge leading to each node
         incoming_edge: dict[Node, Edge] = dict()
         #   stores the shortest distance to each node
-        minimum_distance: dict[Node, int] = dict()
+        minimum_distance: dict[Node, float] = dict()
         # 
         #  declare state variables!
         #   records whether we have found a path to our destination
@@ -61,7 +61,7 @@ class AStar(ShortestPathfinder): #  
                 return
             # 
             #  add all outgoing edges to our list of things to explore!
-            outgoing_edges = node.get_outgoing_edges()
+            outgoing_edges = node.outgoing_edges
             for edge in outgoing_edges:
                 unexplored.push((
                     edge,
@@ -115,7 +115,7 @@ class exploration_vector():
     # The edge we wish to explore
     edge: Edge = field(compare=False)
     # the priority of the edge. Computed as distance of destination node,
-    bias: int = field(compare=True)
+    bias: float = field(compare=True)
 # 
 if __name__ == '__main__':
     print('the test procedure for pathfinding algoirthms is not currently implemented')

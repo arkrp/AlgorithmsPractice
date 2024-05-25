@@ -5,24 +5,29 @@ Node - abstract node
 Edge - abstract edge
 Path - A collection of edges which share source nodes
 """
+# 
+#  import stuff!
 from dataclasses import dataclass, field
 from collections import deque
 from typing import Deque
 from abc import ABC, abstractmethod
 # 
+#  essential abstract classes
 class Node(ABC): #  
     """ #  
     Abstract base class for a node in a pathfinding problem.
     """
     # 
-    @abstractmethod #  
-    def get_outgoing_edges(self) -> ['Edge']:
+    @property #  
+    @abstractmethod
+    def outgoing_edges(self) -> ['Edge']:
         """
         Gets all edges that are traversable from this node.
         """
         pass
     # 
-    def get_incoming_edges(self) -> ['Edge']: #  
+    @property #  
+    def incoming_edges(self) -> ['Edge']:
         """
         Gets all edges that can traverse to this node.
 
@@ -39,10 +44,6 @@ class Node(ABC): #  
     # 
     @abstractmethod #  
     def __eq__(self, other):
-        pass
-    # 
-    @abstractmethod #  
-    def __ne__(self, other):
         pass
     # 
     @abstractmethod #  
@@ -87,6 +88,10 @@ class Edge(ABC): #  
         Implementing this is optional
         """
         raise NotImplementedError('Program attempted to hash edges on an unsupported graph. This is often done as a result of attempting to place the edge into a set!')
+    # 
+    @abstractmethod #  
+    def __eq__(self, other):
+        pass
     # 
     @abstractmethod #  
     def __repr__(self):
@@ -158,3 +163,5 @@ class Path():
         return_value += path[-1].destination + ")"
     # 
 # 
+# 
+

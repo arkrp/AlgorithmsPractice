@@ -13,7 +13,7 @@ NullHueristic - a hueristic which always returns zero. Eg, zero bias.
 # 
 #  import stuff!
 from abc import ABC, abstractmethod
-from graphobjects import Node, Path
+from .graphobjects import Node, Path
 # 
 class Pathfinder(ABC): #  
     """ #  
@@ -50,13 +50,13 @@ class GoalCondition(ABC): #  
 class Hueristic(ABC): #  
     @staticmethod #  
     @abstractmethod
-    def hueristic(node: Node) -> int:
+    def hueristic(node: Node) -> float:
         pass
     # 
 # 
 class NullHueristic(Hueristic): #  
     @staticmethod #  
-    def hueristic(node: Node) -> int:
+    def hueristic(node: Node) -> float:
         return 0
     # 
 # 

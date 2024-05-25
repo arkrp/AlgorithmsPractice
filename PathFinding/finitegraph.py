@@ -13,15 +13,16 @@ FiniteEdge - An edge wich connects the nodes in a FiniteGraph
 # 
 #  import stuff!
 from dataclasses import dataclass, field
-from graphobjects import Node, Edge
 from typing import Any
+from .graphobjects import Node, Edge
 # 
-#  use typing to make things clear
+#   typing!
 NodeId = Any
 EdgeId = Any
 # 
-#  basic implementation for simple usage
-class FiniteGraph(): #  
+#   classes
+@dataclass #  
+class FiniteGraph():
     """
     Represents a graph of finite size for pathing
 
@@ -81,14 +82,18 @@ class FiniteGraph(): #  
         Creates necissary nodes if they don't already exist!
         """
         # 
+        #  check argument validity
+        if edge_id in self.edge:
+            raise ValueError(f"Attempted to insert edge with id which is already taken! {edge_id=}")
+        # 
         #  create the source and destination nodes if needed!
-        if (source_id not in self.node.values):
+        if (source_id not in self.node):
             self.add_node(source_id)
-        if (destination_id not in self.node.values):
+        if (destination_id not in self.node):
             self.add_node(destination_id)
         # 
         #  configure the edge!
-        self.edge[edge_id] = Edge(edge_id, self)
+        self.edge[edge_id] = FiniteEdge(edge_id, self)
         self.edge_source[edge_id] = source_id
         self.edge_destination[edge_id] = destination_id
         self.edge_cost[edge_id] = cost
@@ -102,6 +107,10 @@ class FiniteGraph(): #  
         """ #  
         Removes an edge
         """
+        # 
+        #  check argument validity
+        if edge_id not in self.edge:
+            raise ValueError(f"Attempted to remove an edge which is not present {edge_id=}")
         # 
         #  locate the connected nodes
         source_id: NodeId = self.edge_source[edge_id]
@@ -125,13 +134,15 @@ class FiniteNode(Node):
     node_id: Any = field()
     graph: FiniteGraph = field(hash=False ,repr=False, compare=False)
     # 
-    def get_outgoing_edges(self) -> [Edge]: #  
+    @property #  
+    def outgoing_edges(self) -> [Edge]:
         """
         Gets all edges that are traversable from this node.
         """
         return [self.graph.edge[i] for i in self.graph.outgoing_edges[self.node_id]]
     # 
-    def get_incoming_edges(self) -> [Edge]: #  
+    @property #  
+    def incoming_edges(self) -> [Edge]:
         """
         Gets all edges that can traverse to this node.
         """
@@ -172,4 +183,53 @@ class FiniteEdge(Edge):
         return graph.edge_cost[edge_id]
     # 
 # 
+# 
+def parse_edge_list(edge_list: [[NodeId, NodeId, float]]): #  
+    """
+    Turns a list of unnammed edges into a graph
+    
+    each entry in the edge list represents an edge. It is formatted as:
+    [source node id, destination node id, edge cost]
+
+    an example input would look like this!
+    [[1,2,1],[2,3,1.1],[3,1,1.2],[1,1,0.5]]
+    this represents a graph which has the following edges!
+    1 -> 2 cost 1
+    2 -> 3 cost 1.1
+    3 -> 1 cost 1.2
+    1 -> 1 cost 0.5
+    """
+    return_graph = FiniteGraph()
+    for edge_info_and_number in zip(edge_list, range(len(edge_list))):
+        edge_info, edge_number = edge_info_and_number
+        source_id, destination_id, cost = edge_info
+        return_graph.add_edge(edge_number, source_id, destination_id, cost)
+    return return_graph
+# 
+#  testing!
+if __name__ == '__main__':
+    print('Starting test (Not Automatic, please visually inspect)')
+    edge_list = [
+        [1,2,10],
+        [2,3,11],
+        [3,1,12],
+        [1,1,13]
+        ]
+    print(f'Parsing edge list: {edge_list}')
+    my_graph = parse_edge_list(edge_list)
+    print('Generated graph:')
+    print(f'{my_graph.outgoing_edges=}')
+    print(f'{my_graph.incoming_edges=}')
+    print(f'{my_graph.node.keys()=}')
+    print(f'{my_graph.edge.keys()=}')
+    print(f'{my_graph.edge_source=}')
+    print(f'{my_graph.edge_destination=}')
+    print(f'{my_graph.edge_cost=}')
+    print('Generated responses:')
+    print(f'{my_graph.edge[0].source=}')
+    print(f'{my_graph.edge[0].destination=}')
+    print(f'{my_graph.edge[0].cost=}')
+    print(f'{my_graph.node[1].outgoing_edges=}')
+    print(f'{my_graph.node[1].incoming_edges=}')
+    
 # 

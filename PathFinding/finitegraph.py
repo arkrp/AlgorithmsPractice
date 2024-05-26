@@ -128,10 +128,10 @@ class FiniteGraph():
         # 
     # 
 # 
-@dataclass #  
+@dataclass(frozen=True) #  
 class FiniteNode(Node):
     #  attributes!
-    node_id: Any = field()
+    node_id: NodeId = field()
     graph: FiniteGraph = field(hash=False ,repr=False, compare=False)
     # 
     @property #  
@@ -149,7 +149,7 @@ class FiniteNode(Node):
         return [self.graph.edge[i] for i in self.graph.incoming_edges[self.node_id]]
     # 
 # 
-@dataclass #  
+@dataclass(frozen=True) #  
 class FiniteEdge(Edge):
     #  attributes!
     edge_id: EdgeId = field()

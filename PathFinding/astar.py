@@ -27,7 +27,8 @@ class AStar(ShortestPathfinder): #  
     Warning! - if any of the starting nodes meet the goal condition this will return an empty path.
     """
     # 
-    def find_path(starting_nodes: [Node], goal_condition: GoalCondition, *, hueristic: Hueristic=NullHueristic) -> Path: #  
+    @staticmethod #  
+    def find_path(starting_nodes: [Node], goal_condition: GoalCondition, *, hueristic: Hueristic=NullHueristic) -> Path:
         """ #  
         Finds the shortest path from any starting node to a node which meets the goal condition using the A start algorithm.
 
@@ -91,7 +92,7 @@ class AStar(ShortestPathfinder): #  
             explore(node)
         # 
         #  explore nodes until we reach our destination!
-        while(!path_found and !unexplored.is_empty()):
+        while not (path_found or unexplored.is_empty()):
             #  unpack our exploration vector
             vector = unexplored.pop()
             edge = vector.edge
@@ -114,7 +115,7 @@ class AStar(ShortestPathfinder): #  
         path = Path()
         current_node = path_final_node
         while incoming_edge[current_node] != None:
-            path.append_front_edge(incoming_edge)
+            path.append_front_edge(incoming_edge[current_node])
             current_node = incoming_edge[current_node].source
         return path
         # 
@@ -132,5 +133,30 @@ class _exploration_vector():
 # 
 #  testing!
 if __name__ == '__main__':
-    raise NotImplementedError('the test procedure for the A Star algorithm is not currently implemented')
+    from .finitegraph import parse_edge_list
+    print('Starting test (Not Automatic, please visually inspect)')
+    edge_list = [
+        ['A','B',1],
+        ['A','C',1],
+        ['A','D',1],
+        ['B','D',1],
+        ['C','D',1],
+        ['C','E',1],
+        ['C','F',3],
+        ['D','E',2],
+        ['D','F',1],
+        ['E','F',1],
+        ]
+    print(f'Parsing edge list: {edge_list}')
+    my_graph = parse_edge_list(edge_list)
+    class lookforF(GoalCondition):
+        @staticmethod
+        def is_goal(node):
+            if node.node_id == 'F':
+                return True
+            return False
+    starting_node = my_graph.node['A']
+    print('Finding shortest path from A to F')
+    shortest_path = AStar.find_path([starting_node], lookforF)
+    print(f'{shortest_path=}')
 # 

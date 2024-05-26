@@ -12,7 +12,7 @@ from collections import deque
 from typing import Deque
 from abc import ABC, abstractmethod
 # 
-#  essential abstract classes
+#   abstract classes
 class Node(ABC): #  
     """ #  
     Abstract base class for a node in a pathfinding problem.
@@ -98,6 +98,7 @@ class Edge(ABC): #  
         pass
     # 
 # 
+# 
 @dataclass(slots=True) #  
 class Path():
     """ #  
@@ -118,19 +119,19 @@ class Path():
         """
         # 
         #  deal with there being no edges in present path
-        if len(path) == 0:
-            path.append(edge)
+        if len(self.path) == 0:
+            self.path.append(edge)
             return
         # 
         #  deal with the edge not connecting properly!
-        if path[-1].get_destination() != edge.get_source():
+        if self.path[-1].destination != edge.source:
             raise ValueError(
                     'Appended edge does not connect to end of the current path:\n'+
-                    f'Path end: {path[-1].get_destination()}\n'+
-                    f'Edge start: {edge.get_source()}')
+                    f'Path end: {path[-1].destination}\n'+
+                    f'Edge start: {edge.source}')
         # 
         #  append the edge!
-        path.append(edge)
+        self.path.append(edge)
         # 
     # 
     def append_front_edge(self, edge: 'Edge'): #  
@@ -141,27 +142,26 @@ class Path():
         """
         # 
         #  deal with there being no edges in present path
-        if len(path) == 0:
-            path.append(edge)
+        if len(self.path) == 0:
+            self.path.append(edge)
             return
         # 
         #  deal with the edge not connecting properly!
-        if path[0].get_source() != edge.get_destination():
+        if self.path[0].source != edge.destination:
             raise ValueError(
                     'Appended edge does not connect to end of the current path:\n'+
-                    f'Path end: {path[0].get_source()}\n'+
-                    f'Edge start: {edge.get_destination()}')
+                    f'Path end: {path[0].source}\n'+
+                    f'Edge start: {edge.destination}')
         # 
         #  append the edge!
-        path.appendleft(edge)
+        self.path.appendleft(edge)
         # 
     # 
     def __repr__(self): #  
         return_value = "Path("
-        for edge in path:
-            return_value += edge.source + "->" + edge +  ", "
-        return_value += path[-1].destination + ")"
+        for edge in self.path:
+            return_value += str(edge.source) + "->" + str(edge) +  ", "
+        return_value += str(self.path[-1].destination) + ")"
+        return return_value
     # 
 # 
-# 
-

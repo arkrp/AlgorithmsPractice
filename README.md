@@ -15,6 +15,7 @@ This repository relies on numpy for most of its numerical functions.
 | QuickSort | AlgorithmsPractice.Sorts.quickSort.quick_sort | 
 | HeapSort | AlgorithmsPractice.Sorts.heapSort.heap_sort |
 | InsertionSort | AlgorithmsPractice.Sorts.insertionSort.insertion_sort |
+| A Star | AlgorithmsPractice.PathFinding.astar.AStar |
 
 ## Data Structures:
 | Structure | location |
@@ -33,9 +34,7 @@ python3 -m AlgorithmsPractice.Sorts.module_heap_sort
 
 
 ## Planned (not implemented) algorithms
-A-Star
 Simplex method
-Quick Sort
 Quick Select
 Merge Sort
 Hyper Log Log
@@ -65,7 +64,7 @@ Strassen Algorithm
 Christofides Algorithm
 Newton Raphson Method
 Newton Gauss Algorithm
-Simulated Anealing (metaphorical)
+Simulated Anealing
 Wave Function Collapse Algorithm
 Genetic Algorithm
 Lowest Power Identification via Ratio of least significant digit place to start of roundoff error. (personal experiment)
@@ -78,9 +77,23 @@ Francis Algorithm
 Monty Carlo Matrix Inverse Algorithm
 Euler's Method
 Jump Flood
+Spectral Embedding
+Neuroevolution of Augmenting Topologies
+Inverse Distance Weighting Interpolation
+KNN
+KNN Interpolation
+Bilenear Interpolation
+Bicubic Interpolation
+Linear Regression
+Logistic Regression
+Red Black Tree
+Divide and Conquer Minimum Distance Algoirthm
+KNN graph construction
+FDCT
+DBSCAN
 
-I hope you have a wonderful day!
-Hannah Nelson 2023
+I hope you have a splendid day!
+Hannah Nelson 2024
 
 
 

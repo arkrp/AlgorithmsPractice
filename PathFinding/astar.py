@@ -8,7 +8,7 @@ AStar - a pathfinding.Pathfinder which allows for general purpose pathfinding.
 """
 # 
 #  import stuff
-from .pathfinder import ShortestPathfinder, GoalCondition, Hueristic, NullHueristic
+from .pathfinder import ShortestPathfinder, GoalCondition, Hueristic, NullHueristic, NoPathError
 from .graphobjects import Node, Path, Edge
 from ..DataStructures.heap import Heap
 from dataclasses import dataclass, field
@@ -114,6 +114,8 @@ class AStar(ShortestPathfinder): #  
         #  construct the optimal path from the information we aquired!
         path = Path()
         current_node = path_final_node
+        if current_node == None:
+            raise NoPathError('Pathfinding algorithm found no path from source to destination')
         while incoming_edge[current_node] != None:
             path.append_front_edge(incoming_edge[current_node])
             current_node = incoming_edge[current_node].source
@@ -133,30 +135,8 @@ class _exploration_vector():
 # 
 #  testing!
 if __name__ == '__main__':
-    from .finitegraph import parse_edge_list
-    print('Starting test (Not Automatic, please visually inspect)')
-    edge_list = [
-        ['A','B',1],
-        ['A','C',1],
-        ['A','D',1],
-        ['B','D',1],
-        ['C','D',1],
-        ['C','E',1],
-        ['C','F',3],
-        ['D','E',2],
-        ['D','F',1],
-        ['E','F',1],
-        ]
-    print(f'Parsing edge list: {edge_list}')
-    my_graph = parse_edge_list(edge_list)
-    class lookforF(GoalCondition):
-        @staticmethod
-        def is_goal(node):
-            if node.node_id == 'F':
-                return True
-            return False
-    starting_node = my_graph.node['A']
-    print('Finding shortest path from A to F')
-    shortest_path = AStar.find_path([starting_node], lookforF)
-    print(f'{shortest_path=}')
+    from .test import basic_pathfinder_test
+    basic_pathfinder_test(AStar)
+    from .test import no_path_pathfinder_test
+    no_path_pathfinder_test(AStar)
 # 

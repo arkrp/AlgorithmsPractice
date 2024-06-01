@@ -15,6 +15,7 @@ FiniteEdge - An edge wich connects the nodes in a FiniteGraph
 from dataclasses import dataclass, field
 from typing import Any
 from .graphobjects import Node, Edge
+from .pathfinder import GoalCondition
 # 
 #   typing!
 NodeId = Any
@@ -205,6 +206,20 @@ def parse_edge_list(edge_list: [[NodeId, NodeId, float]]): #  
         source_id, destination_id, cost = edge_info
         return_graph.add_edge(edge_number, source_id, destination_id, cost)
     return return_graph
+# 
+def id_goal_condition(node_ids: set[NodeId]): #  
+    """ #  
+    Generates a GoalCondition which is true only for nodes with specific node_id attributes
+    """
+    # 
+    class LookForId(GoalCondition): #  
+        @staticmethod
+        def is_goal(node):
+            if node.node_id in node_ids:
+                return True
+            return False
+    # 
+    return LookForId
 # 
 #  testing!
 if __name__ == '__main__':

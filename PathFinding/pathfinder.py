@@ -60,3 +60,6 @@ class NullHueristic(Hueristic): #  
         return 0
     # 
 # 
+class NoPathError(RuntimeError): #  
+    pass
+# 

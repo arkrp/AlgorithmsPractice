@@ -19,7 +19,7 @@ class Pathfinder(ABC): #  
     """ #  
     Abstract base class for pathfinding problems. Allows for many problems to share the same interface so pathfinding algorithms may be run on them!
 
-    Example usage: path = Pathfinder.find_path(starting_node, goal_condition)
+    Example usage: path = Pathfinder.find_path(starting_nodes, goal_condition)
     """
     # 
     @staticmethod #  
@@ -35,7 +35,7 @@ class ShortestPathfinder(Pathfinder): #  
     """ #  
     Finds the shortest path
 
-    Example usage: path = ShortestPathfinder.find_path(starting_node, goal_condition)
+    Example usage: path = ShortestPathfinder.find_path(starting_nodes, goal_condition)
     """
     # 
     pass
@@ -61,5 +61,30 @@ class NullHueristic(Hueristic): #  
     # 
 # 
 class NoPathError(RuntimeError): #  
+    pass
+# 
+class BidirectionalPathfinder(ABC): #  
+    """ #  
+    Abstract base class for Bidirectional pathfiding problems. Allows for many problems to share the same interface so pathfinding algorithms may be run on them!
+
+    Example usage: path = BidirectionalPathfinder.find_path(starting_nodes, ending_nodes)
+    """
+    # 
+    @staticmethod #  
+    @abstractmethod
+    def find_path(starting_nodes: [Node], ending_nodes: [Node]) -> Path:
+        """
+        gets a path from a starting node to a ending node
+        """
+        pass
+    # 
+# 
+class ShortestBidirectionalPathfinder(Pathfinder): #  
+    """ #  
+    Finds the shortest path
+
+    Example usage: path = ShortestBidirectionalPathfinder.find_path(starting_nodes, ending_nodes)
+    """
+    # 
     pass
 # 

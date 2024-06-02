@@ -3,7 +3,7 @@ Basic verification tests
 """
 # 
 #  imports!
-from .finitegraph import parse_edge_list, NodeId , id_goal_condition
+from .finitegraph import FiniteGraph, NodeId , id_goal_condition
 from .pathfinder import Pathfinder, NoPathError
 # 
 def basic_pathfinder_test(pathfinder: Pathfinder): #  
@@ -30,7 +30,7 @@ def basic_pathfinder_test(pathfinder: Pathfinder): #  
     # 
     #  parse edge list
     print(f'Parsing edge list: {edge_list}')
-    my_graph = parse_edge_list(edge_list)
+    my_graph = FiniteGraph.from_edge_list(edge_list)
     # 
     #  define goal
     goal = id_goal_condition(set(['F']))
@@ -69,7 +69,7 @@ def no_path_pathfinder_test(pathfinder: Pathfinder): #  
     # 
     #  parse edge list
     print(f'Parsing edge list: {edge_list}')
-    my_graph = parse_edge_list(edge_list)
+    my_graph = FiniteGraph.from_edge_list(edge_list)
     # 
     #  define goal
     goal = id_goal_condition(set(['A']))

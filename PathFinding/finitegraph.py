@@ -24,11 +24,36 @@ EdgeId = Any
 #   classes
 @dataclass #  
 class FiniteGraph():
-    """
+    """ #  
     Represents a graph of finite size for pathing
 
     Please don't write to \'node\' or \'edge\' manually. Read only please.
     """
+    # 
+    @classmethod
+    def from_edge_list(cls ,edge_list: [[NodeId, NodeId, float]]): #  
+        """ #  
+        Turns a list of unnammed edges into a graph
+        
+        each entry in the edge list represents an edge. It is formatted as:
+        [source node id, destination node id, edge cost]
+
+        an example input would look like this!
+        [[1,2,1],[2,3,1.1],[3,1,1.2],[1,1,0.5]]
+        this represents a graph which has the following edges!
+        1 -> 2 cost 1
+        2 -> 3 cost 1.1
+        3 -> 1 cost 1.2
+        1 -> 1 cost 0.5
+        """
+        # 
+        return_graph = FiniteGraph()
+        for edge_info_and_number in zip(edge_list, range(len(edge_list))):
+            edge_info, edge_number = edge_info_and_number
+            source_id, destination_id, cost = edge_info
+            return_graph.add_edge(edge_number, source_id, destination_id, cost)
+        return return_graph
+    # 
     #  needed data!
     node: dict[NodeId, Node] = field(default_factory=dict)
     incoming_edges: dict[NodeId, set[EdgeId]] = field(default_factory=dict)
@@ -185,28 +210,6 @@ class FiniteEdge(Edge):
     # 
 # 
 # 
-def parse_edge_list(edge_list: [[NodeId, NodeId, float]]): #  
-    """
-    Turns a list of unnammed edges into a graph
-    
-    each entry in the edge list represents an edge. It is formatted as:
-    [source node id, destination node id, edge cost]
-
-    an example input would look like this!
-    [[1,2,1],[2,3,1.1],[3,1,1.2],[1,1,0.5]]
-    this represents a graph which has the following edges!
-    1 -> 2 cost 1
-    2 -> 3 cost 1.1
-    3 -> 1 cost 1.2
-    1 -> 1 cost 0.5
-    """
-    return_graph = FiniteGraph()
-    for edge_info_and_number in zip(edge_list, range(len(edge_list))):
-        edge_info, edge_number = edge_info_and_number
-        source_id, destination_id, cost = edge_info
-        return_graph.add_edge(edge_number, source_id, destination_id, cost)
-    return return_graph
-# 
 def id_goal_condition(node_ids: set[NodeId]): #  
     """ #  
     Generates a GoalCondition which is true only for nodes with specific node_id attributes
@@ -231,7 +234,7 @@ if __name__ == '__main__':
         [1,1,13]
         ]
     print(f'Parsing edge list: {edge_list}')
-    my_graph = parse_edge_list(edge_list)
+    my_graph = FiniteGraph.from_edge_list(edge_list)
     print('Generated graph:')
     print(f'{my_graph.outgoing_edges=}')
     print(f'{my_graph.incoming_edges=}')

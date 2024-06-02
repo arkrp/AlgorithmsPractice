@@ -16,11 +16,13 @@ This repository relies on numpy for most of its numerical functions.
 | HeapSort | AlgorithmsPractice.Sorts.heapSort.heap_sort |
 | InsertionSort | AlgorithmsPractice.Sorts.insertionSort.insertion_sort |
 | A Star | AlgorithmsPractice.PathFinding.astar.AStar |
+| BFS | AlgorithmsPractice.PathFinding.astar.BFS |
 
 ## Data Structures:
 | Structure | location |
 |----|----|
 | Heap | AlgorithmsPractice.DataStructures.heap.Heap |
+| Finite Graph | AlgorithmsPractice.PathFinding.finitegraph.FiniteGraph
 
 ## Testing
 To test any given module use the following command:

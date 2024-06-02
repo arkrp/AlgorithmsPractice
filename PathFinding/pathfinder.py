@@ -24,21 +24,12 @@ class Pathfinder(ABC): #  
     # 
     @staticmethod #  
     @abstractmethod
-    def find_path(starting_nodes: [Node], goal_condition: 'GoalCondition') -> Path:
+    def find_path(starting_nodes: [Node], goal_condition: 'GoalCondition', **kwargs) -> Path:
         """
         gets a path from a starting node to a node which meets the goal condition!
         """
         pass
     # 
-# 
-class ShortestPathfinder(Pathfinder): #  
-    """ #  
-    Finds the shortest path
-
-    Example usage: path = ShortestPathfinder.find_path(starting_node, goal_condition)
-    """
-    # 
-    pass
 # 
 class GoalCondition(ABC): #  
     @staticmethod #  

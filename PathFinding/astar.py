@@ -13,7 +13,7 @@ from .graphobjects import Node, Path, Edge
 from ..DataStructures.heap import Heap
 from dataclasses import dataclass, field
 # 
-class AStar(ShortestPathfinder): #  
+class AStar(Pathfinder): #  
     """ #  
     Wrapper for A-Star pathfinding algorithm
 
